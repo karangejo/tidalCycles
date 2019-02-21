@@ -1,0 +1,136 @@
+
+
+p 1 $ s "DXbass:9*4 "  # cut 1 # vowel "i o a e" # cutoff (range 500 5000 $ slow 8 $ sine )
+
+mute 1
+
+setcps(140/60/4)
+
+p 2 $ s "[DX200bd(5,8), DX200sd(2,8,2), DX200hat(8,8)]" # n (irand 8) # gain 0.8
+
+unmute 2
+
+p 3 $ every 2 (fast 2)$ s "plucklead(5,8)" + n (cP "[]" "notes") # orbit 1 # gain 1.2
+
+p 4 $every 2 (fast 2) $ s "vibsawpluck*8" * up (mono $ cP "[]" "notes") |- up "24"  # orbit 1
+
+
+hush
+
+p 1 $ sound "DR660-808:8"
+
+
+
+*********************************************************** new samples *****************************************
+
+setcps(140/60/2)
+
+p 1 $ every 4 ((fast 2).(# n (irand 20)))$ s "[k h s h, c k]"
+
+xfadeIn 8 1 $ s "~"
+
+p 2 $ slow 8 $ s "[bchant:0,bchant:1]"
+
+xfadeIn 8 2 $ s "~"
+
+p 2 silence
+
+p 3 $ juxBy 0.5 (iter 4)$ every 2 (slow 2) $ s "b:10(5,8)" # up  ((scale "minPent" (irand 4)))
+
+xfadeIn 4 3 $ s "~"
+
+p 4 $ slow 4 $ s "DXepiano" # n (irand 20)
+
+n ((scale "minPent" (irand 4))+"e5"
+
+p 5 $ juxBy 0.5 (rev)$ randslice 2 $ slow 2 $ s "koyav:3(3,8)" # orbit 1 # room 0.8 # up ((scale "minPent" (irand 3)))
+
+xfadeIn 4 5 $ s "~"
+
+p 6 $ s "zstbsmin:1" # gain 1.2
+
+xfadeIn 8 6 $ s "~"
+
+p 7 $ degradeBy 0.5 $ whenmod 4 2 (# gain 0)$ s "fx*8" # n (irand 9)
+
+p 7 silence
+
+######################################### I wanna Jump off the World ############################################
+
+setcps(140/60/2)
+
+p 1 $ juxBy 0.5 (rev)$randslice 16 $ slow 4 $ s "koya*16" # cut 1
+
+xfadeIn 16 1 $ slow 4 $ s "koya"
+
+xfadeIn 8 1 $ s "~"
+
+p 2 $ whenmod 4 2 (# vowel "a e i o")$ every 2 (swing 2) $ s "[k k,h*4,s c/2]"
+
+xfadeIn 4 2 $ s "~"
+
+p 3 $ juxBy 0.5 (rev)$ slow 2 $ s "zstbsmin:8"
+
+xfadeIn 4 3 $ s "~"
+
+p 4 $ slow 2 $ s "zyn:1 zyn:0"
+
+xfadeIn 4 4 $ s "~"
+
+p 5 $ slow 2 $ s "zyn:10(10,16)" # up ((scale "minPent" (irand 4))) # n (irand 10)
+
+xfadeIn 8 5 $ s "~"
+
+p 6 $ slow 4 $ s "[stopIWannaJump:2,stopIWannaJump:1/4]"
+
+xfadeIn 8 6 $ s "~"
+
+p 7 $ slow 8 $ s "bchant"
+
+xfadeIn 4 7 $ s "~"
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+p 1 $ slow 4 $ s ""
+
+setcps(140/60/2)
+
+p 1 $ every 2 (fast 2) $ sound "k h s h"
+
+
+
+
+
+
+
+
+hush
+
+
+
+
+
+
+
+'.source.tidalcycles':
+  'Bass drum hihat':
+    'prefix':'bdhh'
+    'body':'p 1 $ s "bd hh"'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+hush
+
+p 1 $ $ s "k h"

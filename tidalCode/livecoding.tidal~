@@ -1,0 +1,29 @@
+setcps(90/60/4)
+
+do
+let d = 0.6
+d1 $ degradeBy d $ striate' 8 (1/10)$ juxBy 0.5 (rev) $ n "[e'min a'min]/2" # sound "superhammond" # gain 1 # accelerate 0.01 # pan rand # cutoff (range 1000 5000 $ slow 4 $ sine )
+d3 $ degradeBy d $ slowcat [n ((scale "minPent" "0 2 4 6 8")+"e2")
+             ,n ((scale "minPent" "0 2 4 6 8")+"a2")]
+              # sound "supersaw" # accelerate 0.01 +| gain "1*16" # cutoff (range 1000 5000 $ slow 4 $ sine )
+d4 $ degradeBy d $ juxBy 0.5 (rev)$ degradeBy 0.3 $ slowcat [n ((scale "minPent" (irand 4))+"e5")
+             ,n ((scale "minPent" (irand 4))+"a5")]
+              # sound "superchip" # accelerate 0.01 +| gain "0.9*16" # cutoff (range 1000 5000 $ slow 4 $ sine )
+d2 $ degradeBy d $ whenmod 4 2 (# shape 0.5)$ juxBy 0.5 (# vowel "a e i o u")$ sound "[[bd*4] ~ [bd*4] ~, hh*8, cp:4(5,8)]" # gain 1.2 # cutoff (range 1000 5000 $ slow 4 $ sine )
+
+d1 silence
+
+do
+t1 xfadeIn 8 $ sound "~"
+t2 xfadeIn 8 $ sound "~"
+t3 xfadeIn 8 $ sound "~"
+t4 xfadeIn 8 $ sound "~"
+
+hush
+
+
++++++++++++++++++++++++++++++++++++++++++++ -------------- ++++++++++++++++++++++++++ ///////////////
+
+d1 $ slowcat [n "c'maj",n "d'min",n "f'maj",n "g'maj"] # sound "superhammond" # gain 1
+
+d2 $ slowcat [n ((scale "majPent" (irand 8))+"c2") ,n ((scale "minPent" (irand 8))+"d2"), n ((scale "majPent" (irand 8))+"f2"), n ((scale "majPent" (irand 8))+"g2")]# sound "supersaw" +| gain "1*16

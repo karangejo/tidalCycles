@@ -1,0 +1,168 @@
+cps (140/60/4)
+
+d1 $ slow 2 $ (sound $ samples "birds*10" (run 10)) # room 0.9 # size 0.9 # gain 0.5 # orbit 1
+
+d1 silence
+
+d2 $ slow 2 $ (sound $ samples "electro1*13" (run 13))# room 0.8 # size 0.7
+
+d2 $ juxBy 0.5 (iter 4) $ every 2 (fast 2) $ sound "[electro1:6 electro1:6/2] electro1:11" # room 0.5 # size 0.5 # gain 2.4 # orbit 0
+
+d2 silence
+
+d1 $ juxBy 0.5 (rev) $ palindrome $ foldEvery [4,2] (iter 4) $ sound "[bd(5,8),cp(3,8)]" # gain 0.7 # room 0.3 # size 0.3 # orbit 0
+
+d5 $ sound "[cp(5,8)]/2"  # gain 1.3  room 0.8 # size 0.8
+
+d5 silence
+
+hush
+
+do
+  let mode = "minor"
+  let bassnotes = 8
+  d4 $ degradeBy 0.2 $ every 2 (fast 2)
+     $ slowcat [scramble bassnotes (n ((scaleP mode (run bassnotes)) + "e1"))
+               ,scramble bassnotes (n ((scaleP mode (run bassnotes)) + "a1"))]
+                 # sound "superpwm"
+                 # sustain 0.1
+                 # gain 1.4
+  d3 $ juxBy 0.5 (stut 4 0.8 0.5)
+     $ slowcat [n ("e4" + chord mode)
+               ,n("a4" + chord mode)]
+                  # sound "supermandolin"
+                  # accelerate 0.2
+                  # sustain 0.3
+                  # room 0.5
+                  # size 0.5
+                  # gain 1.2
+                  # orbit 1
+
+d1 silence
+
+d2 $ juxBy 0.5 (rev) $ every 2 ((fast 2) . (# crush 4)) $ chop 8 $ degradeBy 0.0 $ slowcat [shuffle 2 (n ((scaleP "minor" (run 2)) + "e5"))
+             ,shuffle 2 (n ((scaleP "minor" (run 2)) + "a5"))]
+                # sound "superpwm"
+                # accelerate 0.2
+                # semitone 24
+                # delay 0.8 # delayfeedback 0.5 # delaytime 0.25
+
+d1 $ striate' 8 (1/32) $ sound "moog"
+
+d2 $ striate' 8 (1/64) $ sound "moog" # up "5"
+
+d1 silence
+
+
+hush
+
+
+
+d2 $ fast 4 $ juxBy 0.5 (rev)$ striate' 64 (1/75)
+
+ d2 $ fast 4 $ juxBy 0.5 (rev)$ striate' 64 (1/75)$ sound "HomewardFishDrums:4"
+    # unit "c"
+    # speed 1
+    # gain 1.2
+    # cutoff (scale 1000 4000 $ slow 2 $ sine)
+
+d1 silence
+
+
+????????????? HOMEWARD FISH REMIX???????????????????????? sounds pretty cool!!!!
+
+cps (80/60/8)
+
+d1 $ fast 2 $ juxBy 0.5 (rev) $ striate' 64 (1/80)
+
+d1 $ fast 2$ juxBy 0.5 (rev)$ striate' 64 (1/80)$ sound "HomewardFishDrums:4"
+   # unit "c"
+   # speed 1
+   # gain 1.1
+   # cutoff (scale 1000 4000 $ slow 2 $ sine)
+
+d1 $ juxBy 0.5 (iter 4) $ fast 2 $ sound (samples "HomewardFishDrums*8" (shuffle 8 (run 8))) # cut 1 # up "12*4 24*4"
+
+
+hush
+
+do
+let dby = 0.3
+d1 $ degradeBy dby $ juxBy 0.5 (iter 4) $ fast 2 $ sound (samples "HomewardFishDrums*8" (shuffle 8 (run 8))) # up "12*4 24*4"
+d2 $ degradeBy (dby - 0.3) $ fast 2 $ sound (samples "HomewardFishVocal1*4" (shuffle 4(run 4))) # gain 1.0 # pan 0 # room 0.7 # size 0.7 # orbit 1
+d3 $ degradeBy (dby - 0.3) $ fast 2 $ sound (samples "HomewardFishVocal2*4" (shuffle 4(run 4))) # gain 1.0 # pan 1 # room 0.7 # size 0.7 # orbit 1
+
+do
+d1 $ sound "HomewardFishDrums:4"# unit "c" # speed 1
+t2 clutch $ sound "~"
+t3 clutch $ sound "~"
+
+t1 (xfadeIn 4) $ sound "~"
+
+?????????????????????????? CANT BUY IT YOURSELF ???????????????????????????????????????? loop not in time
+
+cps(182/60/8)
+
+d1 $ gap 2 $ chop 8 $ sound "[cantBuyItIntro:10,cantBuyItLoop:15]"
+   # unit "c"
+   # speed 1
+
+??????????????????????????????????????BASS NOTE BEAT ????????????????????????????????... whatever
+
+   cps(79/60/16)
+
+hush
+
+d1 $ every 2 (# crush 4) $ juxBy 0.5 (rev) $ sound "bassNoteBeat:38*2"
+   # unit "c"
+   # speed 2
+   # room 0.7 # size 0.7 # orbit 1
+
+d2 $ fast 64 $ sound "moog*4" |+| up "40 40 40 40" # up "0 2 4 6" # cut 1 # gain 1.3
+
+do
+t1 (xfadeIn 4) $ sound "~"
+t2 (xfadeIn 4) $ sound "~"
+
+
+d1 $ every 2 (|+| speed 2) $ juxBy 0.5 (rev) $ fast 2 $ sound (samples "bassNoteBeat*64" (shuffle 64(run 64))) # cut 1 # gain 1.2 # shape 0.9
+
+d1 silence
+
+cps(100/60/16)
+
+d1 $ jux (rev)$ sound "funkyStabs:44*1"
+   # unit "c"
+   # speed 1
+
+d1 $ fast 2 $ stack [sound (samples"funkyStabs*32" (shuffle 32(run 32))) # up (shuffle 32 (run 32))
+            ,sound (samples"funkyStabs*16" (shuffle 16(run 16))) # up (shuffle 16 (run 16))]
+
+hush
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ LEAVE BABYLON $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+cps(65/60/16)
+
+d1 $ fast 1.5 $ juxBy 0.5 (# crush 4) $ striate' 128 (1/150) $
+
+d1 $ juxBy 0.5 (iter 4) $ striate' 128 (1/150) $ sound "LeaveBabylon:11" # unit "c" # speed 1 # room 0.5 # size 0.5
+
+d1 $ fast 4 $ stack [sound (samples "LeaveBabylon*16" (shuffle 16 (run 16))) # up "2"# pan 1 # cut 1
+                    ,sound (samples "LeaveBabylon*16" (shuffle 16 (run 16))) # up "1"# pan 0 # cut 2]$$$$$$
+
+                       $$$$$$$$$$$$$$$$$$$$$$$$$$ CANT IT YOURSELF##################
+
+hush
+
+cps(85/60/4)
+
+d1 $ rev $ striate' 64 (1/80)$ slowcat [sound "cantBuyItBass1:14" # unit "c" # speed 1
+             , sound "cantBuyitBass2:12" # unit "c" # speed 1] # gain 0.9 # cutoff (scale 1000 5000 (slow 8$ sine))
+
+d2 $ whenmod 4 2 (|-| speed 0.25)$ striate' 128 (1/150)$ slow 2 $ sound "cantBuyItStopChant:6" # unit "c" # speed 0.5 # gain 0.8
+
+do
+t1 (xfadeIn 4) $ sound "~"
+t2 (xfadeIn 4) $ sound "~"

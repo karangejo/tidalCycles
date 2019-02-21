@@ -1,0 +1,212 @@
+setcps(90/60/4)
+
+do
+let d = 0.6
+
+d1  $ striate' 8 (1/10)$ juxBy 0.5 (rev) $ n "[e'min a'min]/2" # sound "superhammond" # gain 1 # accelerate 0.01 # pan rand # cutoff (range 1000 5000 $ slow 4 $ sine )
+
+d3 $ slowcat [n ((scale "minPent" "0 2 4 6 8")+"e2")
+             ,n ((scale "minPent" "0 2 4 6 8")+"a2")]
+              # sound "supersaw" # accelerate 0.01 +| gain "1*16" # cutoff (range 1000 5000 $ slow 4 $ sine )
+
+d4 $ degradeBy 0.4 $ juxBy 0.5 (rev)$ degradeBy 0.3 $ slowcat [n ((scale "minPent" (irand 4))+"e5")
+             ,n ((scale "minPent" (irand 4))+"a5")]
+              # sound "superchip" # accelerate 0.01 +| gain "0.9*16" # cutoff (range 1000 5000 $ slow 4 $ sine )
+
+d2 $ every 2 ((fast 2) . (# speed 2))$ whenmod 4 2 ((# shape 0.5))$ juxBy 0.5 (# vowel "a e i o u")$ sound "[[bd*4] ~ [bd*4] ~, hh*8, cp:4(5,8)]" # gain 1.2 # cutoff (range 1000 5000 $ slow 4 $ sine )
+
+d1 silence
+
+do
+t1 (xfade) $ sound "~"
+t2 (xfade) $ sound "~"
+t3 (xfade) $ sound "~"
+
+t4 (xfadeIn 8) $ sound "~"
+
+hush
+
+setcps(101/60/12)
+
+p 1 $ fast 4 $juxBy 0.5 (rev) $ striate' 48 (1/50)
+
+p 3 $ degradeBy 0.1 $ whenmod 4 2 (# crush 6) $ juxBy 0.5 (rev)$ striate' 48 (1/50)$ sound "koya:0" # unit "c" # speed 1
+
+# cutoff (range 1000 5000 $ slow 4 $ sine )
+
+# cutoff (range 1000 5000 $ slow 4 $ sine )
+
+p 2 $ whenmod 4 2 ((fast 2) . (# crush 6)) $ sound "[bd(7,12),[cp(7,12,3)]/2,hh*24]"
+
+p 1 $ degradeBy 0.1 $ fast 2 $ juxBy 0.5 (rev)$ striate' 48 (1/60)$ sound "koya:3" # unit "c" # speed 1 #cutoff (range 1000 5000 $ slow 4 $ sine )
+
+
+do
+  d1 silence
+  d2 silence
+
+d3 $ juxBy 0.5 (rev) $ every 2 (fast 2)$ sound "koya:3" # unit "c" # speed 1 # gain (slow 2 $sine) # pan 0
+
+
+setcps(54/60/8)
+
+d1 $ fast 2 $ juxBy 0.5(rev) $ striate' 64 (1/80) $ sound "HomewardFishDrums:4" # unit "c" # speed 1 # gain 0.7
+
+d2 $ sound "HomewardFishVocal1:9" #unit "c" # speed 1
+
+d2 $ sound (samples "HomewardFishVocal1*24" (irand 8)) # cut 1 # gain 0.8 # up "12*4 12*4"
+
+hush
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++ -------------- ++++++++++++++++++++++++++ ///////////////
+
+
+do
+let f = whenmod 8 4 ((# crush 8) . (fast 2). (degradeBy 0.3))
+
+d1 $ slowcat [n "c'maj",n "d'min",n "f'maj",n "g'maj"] # sound "superhammond" # gain 1
+
+d2 $ degradeBy 0.4 $ slowcat [n ((scale "majPent" (irand 8))+"c2") ,n ((scale "minPent" (irand 8))+"d2"), n ((scale "majPent" (irand 8))+"f2"), n ((scale "majPent" (irand 8))+"g2")]# sound "supersaw" +| gain "1*16" |+ 36
+
+d3  $ degradeBy 0.4 $ slowcat [n ((scale "majPent" (irand 8))+"c2") ,n ((scale "minPent" (irand 8))+"d2"), n ((scale "majPent" (irand 8))+"f2"), n ((scale "majPent" (irand 8))+"g2")]# sound "supersaw" +| gain "1.2*8"
+
+hush
+
+
+
+p "one" $ sound "bd(3,8)"
+
+xfadeIn 4 "one" $ sound "~"
+
+p "one" $ sound "bd(3,8)"
+
+clutch "one" $ sound "hh*8"
+
+setcps(79/60/16)
+
+p 1 $ degradeBy 0.2 $ every 2 (rev) $ juxBy 0.5 (iter 4) $ fast 4 $ sound (samples "bassNoteBeat*24" (irand 24)) # cut 1
+
+p 2 $ stut 4 0.6 0. $ fastcat [n " ~ c'maj ~ c'maj",n "~ d'min ~ d'min",n "~ f'maj ~ f'maj",n "~ g'maj ~ g'maj"] # sound "superhammond" # gain 0.8
+
+hush
+
+setcps(100/60/8)
+
+p 1 $ juxBy 0.5 (rev)$ striate' 16 (1/30) $ slowcat [n "f'maj",n "b'maj"]- 12 # sound "superpiano" # gain 0.7
+
+p 2 $ degradeBy 0.2 $ juxBy 0.5 (rev)$ sometimes (|+ 12) $ slowcat [n ((scale "majPent" (irand 8))+"f2") ,n ((scale "majPent" (irand 8))+"b2")] # sound "supersaw" +| gain "0.8(25,32)"
+
+p 3 $ degradeBy 0.1 $ juxBy 0.5 (iter 16)$ whenmod 4 2 ((fast 2) . (#crush 6)) $ fast 2 $ sound "[bd(5,8),[cp(3,8)]/2,hh*16]"
+
+
+p 1 $ n "12 -12" # s "zyn" # midichan 0
+
+p 2  $ whenmod 4 2 (|+ 12)$ fast 2 $ n (scale "dorian" (irand 5)) # s "zyn" # midichan 1 +| gain "1*8"
+
+p 3 $ fast 2 $ midinote "[36(5,8),39(3,8), 44(11,16), 45*16]" # s "hyd"
+
+p 3 $ sound (samples "808bd*8" (irand 8))
+
+hush
+
+setcps(100/60/4)
+
+d1 $ sound "arpy(3,8)" # n (irand 16)
+
+d1 $ randslice 32 $ sound "bev"
+
+p 2 $ every 4 (|+ up "12")$ every 2 (#crush 4)$ degradeBy 0.2 $ every 2 (striate' 2 (1/3))$ fast 4 $ juxBy 0.5 (iter 8) $ sound "arpy arpy:1 arpy:2 arpy:3"
+
+p 3 $ every 3 (|+ 12)$ every 2 (# crush 4)$ degradeBy 0.1 $ juxBy 0.5 (rev) $ striate' 4 (1/8) $ fast 2 $ palindrome $ n "0 3 7 9" # sound "supersaw" |- 24 # gain 0.8
+
+p 1 $ degradeBy 0.1 $ juxBy 0.5 (iter 8)$ every 2 ((fast 2) . (# crush 6))$ sound "[bd*8,cp(3,8),hh*16]"
+
+
+hush
+
+p 1 $ rarely (randslice 2) $ rarely (|+ speed 2)$ juxBy 0.5 (iter 8)$ sometimes (# crush 6)$ degradeBy 0.3 $ fast 2
+    $ s "[TEMPbd(5,8),TEMPsd(3,8),TEMPhihat*8]" # n (irand 24)
+    # cutoff (range 1000 5000 $ slow 4 $ sine) # gain 1.2
+
+p 2 $ stut 4 0.8 0.5 $ slow 2 $ n "e'min a'min" # s "supervibe"
+
+p 3 $ sometimes (# voice 1) $ rarely (# crush 4) $ sometimes (|- 12) $ slow 2 $ n (arpg "e'minor7*4 a'minor7*4")
+    # sound "superpwm" # cutoff (range 1000 5000 $ slow 4 $ cosine)
+
+xfadeIn 4 1 $ sound "~"
+
+p 4 $ sometimes ((# resonance 0.9) . (# voice 1)) $ degradeBy 0.2 $ juxBy 0.5 (rev)
+    $ slowcat [n ((scale "minPent" (irand 8))+"e2") ,n ((scale "minPent" (irand 8))+"a2")]
+    # s "supersaw" +| gain "1.2(10,16)"
+
+p 1 $ s "bd ~ ~ [bd*4]" # orbit 0
+
+p 2 $ s "hh*8" # orbit 1
+
+p 3 $ s "~ cp ~ ~" # orbit 2
+
+hush
+
+setcps(120/60/4)
+
+p 1 $ whenmod 4 2 (fast 2)$ sew (every 2 inv "t f t f") (s "DR660bd:3(5,8)") (s "DR660sd:3(4,8)")
+
+p 4 silence
+
+p 4 $ juxBy 0.5 (+| 12 )$ n "d'min d4 d5 d4" # s "superhammond" # gain 0.8
+
+p 2 $ juxBy 0.5 (rev . (# crush 4))$ n "d'min(10,16)" # s "supermandolin" # gain 1.5
+
+p 3 $ degradeBy 0.4 $ n ((scale "minPent" (irand 8)) +"d2") # s "superpwm" +| gain "1.2(14,16)"
+
+p 1 $ degradeBy 0.4 $ every 2 (fast 2) $ juxBy 0.5 (rev)$ s "[DR660bd(3,8),DR660sd(5,8)]" # n (irand 8) # gain 1
+
+
+do
+xfadeIn 4 1 $ s "~"
+xfadeIn 4 3 $ s "~"
+
+xfadeIn 4 2 $ s "~"
+
+setcps(120/60/4)
+
+hush
+
+p 1 silence
+
+p 1 $ degradeBy 0.5 $ every 2 (fast 2) $ s "[TEMPperc(3,8),TEMPsd(5,8),TEMPhihat(8,8)]" # n (irand 25) # cutoff (range 1000 5000 $ slow 4 $ sine )
+
+xfadeIn 4 1 $ juxBy 0.5 (rev) $ striate' 8 (1/10)$ s "DXepiano*2" # n (irand 12) # gain 1.5
+
+p 3 silence
+
+p 4 $ s "DXbass:9*4 "  # cut 1 # vowel "i o a e "
+
+p 3 $ s "DXbass:9*4 " # cut 2 |+ vowel "o a i u " |+ up (irand 12)
+
+xfadeIn 4 1 $striate' 4 (1/5)$ s "DXseq*2" # n (irand 20) # cut 1
+
+p 1 $ s "DX200bd:2*2 DX200hat DX200sd DX200hat*4" # n (irand 10) # gain 1.5
+
+p 2 $ degradeBy 0.5 $ s "MT70vibe(16,16)" # n (irand 8) # gain 0.8 |+ up (irand 12)
+
+p 3 $ every 2 (fast 2)$degradeBy 0.2 $ slowcat [n ((scale "minPent" "0 2 4 6 8")+"e4"),n ((scale "minPent" (irand 4))+"a4") ]# s "superpwm" +| gain "0.8*8"
+
+p 3 silence
+
+p 4 $ slow 2 $ n "e'min a'min" # s "supervibe"
+
+p 4 silence
+
+p 1 $ s "DXsynth:3*4" # up "0 2 4 6 8" # cut 1
+
+p 1 silence
+
+
+
+p 2 $ every 2 (fast 2) $ every 2 (# n (irand 25))$ s "DX200bd:2(6,8)" # gain 2
+
+p 3 $juxBy 0.5 (rev)$ loopAt 8 $ striate' 128 (1/150)$ sound "LeaveBabylon:11" # unit "c" # speed 1 # gain 1.3

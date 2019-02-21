@@ -1,0 +1,129 @@
+cps (140/60/4)
+
+hush
+
+d1  $ juxBy 0.5 ((# speed "0.5") . rev)
+    $ every 2 ((|-| resonance "0.4") . linger 0.25)
+    (palindrome
+    $ iter 4
+    $ sound "[feel feel:3, hc:3 hc:2 hc:4 ho:1]"
+      # speed (scale 0.5 2 $ slow 5 $ sine)
+      # cutoff (scale 1000 20000 $ slow 2 $ sine)
+      # resonance "0.8")
+      # gain 0.7
+ 2
+
+
+d1 $ stut' 2 (1/16) (# crush 8) $
+
+hush
+
+d1  $ stut' 8 (1/16) (# crush 8)
+
+d1 $ stut 4 0.8 0.5 $ slowcat [n ("e4" + chord "minor")
+              ,n("a4" + chord "minor")]
+                # sound "superpiano"
+                # room 0.9
+                # size 0.9
+                # gain 0.8
+                # cutoff (scale 1000 4000 $ slow 4 $ sine)
+
+                # resonance "0.3"
+
+                # gain 0.8
+
+d1 silence
+
+d2 $ degradeBy 0.1 $ spread ($) [(# crush 6), rev, (# crush 8),(# speed 0.8)]$ juxBy 0.5 (rev ) $ brak
+
+d2 $ degradeBy 0.9 $ every 2 (0.25 <~) $ foldEvery [16,8,4] (fast 2) $ every 2 (#crush 8) $ palindrome $ juxBy 0.5 (rev) $ sound "[[bd*2] [cp ~ bd bd]]"
+
+d2 $ juxBy 0.5 (rev) $ every 2 (fast 2)
+
+d2 $ sound "[[bd*2] [cp ~ bd bd]]"
+
+d1 silence
+
+d1 $ sound "tabla2"
+
+d3  $ stut' 2 (1/16) (# crush 8)
+
+d3 silence
+
+d3 $ degradeBy 0.0 $ stut' 4 (1/16) (# crush 8)
+
+
+d3  $ degradeBy 0.9 $ slowcat [shuffle 4 (n ((scaleP "minor" "0 2 4 6") + "e2"))
+               ,shuffle 4 (n ((scaleP "minor" "0 2 4 6") + "a2"))]
+              # sound "supersaw"
+              # cutoff (scale 1000 5000 $ slow 16 $ sine)
+              # resonance "0.5"
+              # gain 0.8
+
+d1 $ sound "bev" # unit "c" # speed "1"
+
+d1 silence
+
+d2 silence
+
+d3 silence
+
+hush
+
+d1 $ sound "bd(3,8)"
+
+t1 clutch $ sound "cp(5,8)"
+
+
+
+d1 $ weave' 3 (sound "bd [sn drum:2*2] bd*2 [sn drum:1]") [fast 2, (# speed "0.5"), chop 16]
+
+wedge
+
+d1 $ weave 16 (sound "arpy*8" # n (run 8))
+  [vowel "a e i",
+   vowel "i [i o] o u",
+   vowel "[e o]/3 [i o u]/2",
+   speed "1 2 3"
+  ]
+
+
+
+d1 $ weave 16 (pan sine)
+  [sound "bd cp cp",
+   sound "casio casio:1",
+   sound "[arpy*2 arpy:2]/2",
+   sound "hc*4"
+  ]
+
+
+
+d1 $ slow 1 $ spin 4 $ sound "bd cp [arpy:2 ~ arpy] [hh hh]"
+
+d1 $ append' (sound  "bd cp hh") (sound  "arpy")
+
+
+d1 $ seqPLoop [
+  (0, 12, sound "bd bd*2"),
+  (4, 12, sound "hh*2 [sn cp] cp future*4"),
+  (8, 12, sound (samples "arpy*8" (run 16)))
+]
+
+
+cat
+
+d1 $ swingBy (1/) 4 $ sound "hh*8"
+
+d1 $ every 3 (fast 2) $ every 4 (fast 2) $ every 5 (fast 2) $ sound "bd sd cp"
+
+d1 $ foldEvery [2, 2] (fast 2) $ sound "bd cp hh"
+
+d1 $ stut' 4 (1/16) (# vowel "{a e i o u}%8") $ sound "[bd(5,8), cp(3,8)]"
+
+d1 $ slow 32 $ striate' 32 (1/16) $ sound "bev"
+
+d1 $ loopAt 8 $ chop 20 $ sound "bev"
+
+d1 $ loopAt 8 $ juxBy 0.5 (# resonance "0.2") $ chop 32 $ sound "bev"
+
+d1 $ slow 2 $ striate 16 $ sound "hh*5"
